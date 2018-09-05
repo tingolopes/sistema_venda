@@ -1,4 +1,2 @@
-# sistema_venda
-# Um sistema simples de venda desenvolvido durante as aulas de Desenvolvimento Web 2
-# trabalhando com PHP + MYSQL + Blade (como gerador de views)
-# 4° semestre, TADS - IFMS
+# Sistema Vendas
+Um sistema simples de venda desenvolvido durante as aulas de Desenvolvimento Web 2 PHP + MYSQL + Blade (como gerador de views) + Bootstrap. 4° semestre do TADS - IFMS
