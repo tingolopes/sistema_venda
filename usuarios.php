@@ -5,8 +5,6 @@ require './config.php';
 require './lib/funcoes.php';
 require './lib/conexao.php';
 
-echo "ola";
-
 $q ='';
 if(isset($_GET['q'])){
   $q =trim($_GET['q']);
