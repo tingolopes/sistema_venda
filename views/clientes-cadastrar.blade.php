@@ -52,8 +52,6 @@
         </div>
         <button type="submit" class="btn btn-primary">Cadastrar</button>
         <button type="reset" class="btn btn-danger">Cancelar</button>
-        {{$ativo}}
-        {{CLIENTE_ATIVO}}
     </form>
 
 </div>
