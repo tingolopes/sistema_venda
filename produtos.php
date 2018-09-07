@@ -1,8 +1,6 @@
 <?php
 
-use App\Controller\ProdutoController;
-
 require './config.php';
 
-$controller = new ProdutoController();
+$controller = new \App\Controller\ProdutoController();
 $controller->listarAction();
