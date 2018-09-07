@@ -8,18 +8,15 @@ use App\Vo\Cliente;
 use Exception;
 use PDO;
 
-class ClienteController extends Controller
-{
+class ClienteController extends Controller {
 
-    public function __construct()
-    {
+    public function __construct() {
         require './protege.php';
         require './lib/funcoes.php';
         // require './lib/conexao.php';
     }
 
-    public function cadastrarAction()
-    {
+    public function cadastrarAction() {
         $msg = array();
 
         $nome = '';
@@ -55,30 +52,22 @@ class ClienteController extends Controller
             'ativo' => $ativo,
             'msg' => $msg
         ));
-
     }
 
-    public function listarAction()
-    {
+    public function listarAction() {
 
         $q = '';
         if (isset($_GET['q'])) {
             $q = trim($_GET['q']);
         }
 
-
-        $sql = "Select idcliente, nome, email, ativo from cliente";
+        // Produtos
+        $sql = "select * from cliente";
+        if ($q != '') {
+            $sql .= " where nome like '%$q%'";
+        }
         $con = Conexao::getConexao();
         $clientes = $con->query($sql)->fetchAll(PDO::FETCH_ASSOC);
-
-        $array = array();
-        if ($q != '') {
-            $array[] = "(cliente like '%$q%')";
-        }
-
-        if ($array) {
-            $sql .= " Where " . join(' or ', $array);
-        }
 
         // require VIEWS . '/produtos.php';
         $view = $this->view();
@@ -87,6 +76,5 @@ class ClienteController extends Controller
             'clientes' => $clientes
         ));
     }
-
 
 }

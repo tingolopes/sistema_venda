@@ -7,7 +7,7 @@ require './lib/conexao.php';
 
 $msg = array();
 if (isset($_GET['idcategoria'])){
-$idcategoria = $_GET['idcategoria'];  
+$idcategoria = $_GET['idcategoria'];
 
 }else{
   $idcategoria = $_POST['idcategoria'];

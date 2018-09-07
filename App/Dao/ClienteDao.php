@@ -36,6 +36,15 @@ class ClienteDao
 
         return true;
     }
+    
+    public function read(Cliente $cliente){
+        
+        $sql = "Select idcliente, nome, email, ativo from cliente";
+        $con = Conexao::getConexao();
+        $clientes = $con->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+        
+        return $cliente;
+    }
 
     public function delete(Cliente $cliente)
     {

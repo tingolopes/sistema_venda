@@ -42,29 +42,29 @@
     </thead>
     <tbody>
       
-        @foreach ($clientes as $resultado)
+        <?php $__currentLoopData = $clientes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $resultado): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 
         <tr>
-        <td>{{ $resultado['idcliente'] }}</td>
+        <td><?php echo e($resultado['idcliente']); ?></td>
         <td>
 
-          @if($resultado['ativo'] == CLIENTE_ATIVO)
+          <?php if($resultado['ativo'] == CLIENTE_ATIVO): ?>
             <span class="label label-success">ativo</span>
-          @else
+          <?php else: ?>
             <span class="label label-warning">inativo</span>
-          @endif
+          <?php endif; ?>
 
         </td>
 
-        <td>{{ $resultado['nome'] }}</td>
+        <td><?php echo e($resultado['nome']); ?></td>
 
         <td>
-          <a href="clientes-editar.php?idcliente={{ $resultado['idcliente'] }}" title="Editar cliente"><i class="fa fa-edit fa-lg"></i></a>
-          <a href="clientes-apagar.php?idcliente={{ $resultado['idcliente'] }}" title="Remover cliente"><i class="fa fa-times fa-lg"></i></a>
+          <a href="clientes-editar.php?idcliente=<?php echo e($resultado['idcliente']); ?>" title="Editar cliente"><i class="fa fa-edit fa-lg"></i></a>
+          <a href="clientes-apagar.php?idcliente=<?php echo e($resultado['idcliente']); ?>" title="Remover cliente"><i class="fa fa-times fa-lg"></i></a>
         </td>
         </tr>
 
-      @endforeach
+      <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
         
     </tbody>
   </table>
