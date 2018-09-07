@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Conexao;
 use App\Dao\UsuarioDAO;
 use App\Vo\Usuario;
 use Exception;
