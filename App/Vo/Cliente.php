@@ -15,10 +15,10 @@ class Cliente
     public static function fromArray($array)
     {
         $cliente = new Cliente();
-        $cliente->setIdcliente($array['idcliente']);
-        $cliente->setNome($array['nome']);
-        $cliente->setEmail($array['email']);
-        $cliente->setAtivo($array['ativo']);
+        $cliente->setIdcliente();
+        $cliente->setNome();
+        $cliente->setEmail();
+        $cliente->setAtivo();
 
         return $cliente;
     }
