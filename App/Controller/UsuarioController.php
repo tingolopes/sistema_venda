@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Dao\UsuarioDAO;
+use App\Dao\UsuarioDao;
 use App\Vo\Usuario;
 use Exception;
 
@@ -46,7 +46,7 @@ class UsuarioController extends Controller
             $usuario->setSenha($senha);
             $usuario->setStatus($status);
 
-            $usuarioDao = new UsuarioDAO();
+            $usuarioDao = new UsuarioDao();
 
             try {
                 $usuarioDao->create($usuario);
