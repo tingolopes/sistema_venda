@@ -25,18 +25,18 @@
 
             <form role="form" method="post" action="produtos-editar.php">
 
-                <input type="hidden" name="idproduto" value="{{$idproduto}}">
+                <input type="hidden" name="idproduto" value="<?php echo e($idproduto); ?>">
 
                 <div class="form-group">
                     <label for="fdescricao">Descrição</label>
-                    <input type="text" class="form-control" id="fdescricao" name="descricao" placeholder="Descrição do produto" value="{{$descricao}}" required>
+                    <input type="text" class="form-control" id="fdescricao" name="descricao" placeholder="Descrição do produto" value="<?php echo e($descricao); ?>" required>
                 </div>
 
                 <div class="form-group">
                     <label for="fpreco">Preço</label>
                     <div class="input-group">
                         <span class="input-group-addon">R$</span>
-                        <input type="text" class="form-control" id="fpreco" name="preco" placeholder="Preço" value="{{$preco}}" required>
+                        <input type="text" class="form-control" id="fpreco" name="preco" placeholder="Preço" value="<?php echo e($preco); ?>" required>
                     </div>
                 </div>
 
@@ -47,12 +47,12 @@
                         <?php
                         foreach ($categorias as $r) {
                             ?>
-                            <option value="{{$r['idcategoria']}}"
-                                    @if($idcategoria == $r['idcategoria'])
+                            <option value="<?php echo e($r['idcategoria']); ?>"
+                                    <?php if($idcategoria == $r['idcategoria']): ?>
                                     selected
-                                    @endif
+                                    <?php endif; ?>
 
-                                    >{{$r['categoria']}}</option>
+                                    ><?php echo e($r['categoria']); ?></option>
 
                     <?php } ?>
                     </select>
@@ -60,16 +60,16 @@
 
                 <div class="form-group">
                     <label for="fsaldo">Saldo</label>
-                    <input type="number" class="form-control" id="fsaldo" name="saldo" placeholder="Estoque" value="{{$saldo}}" required>
+                    <input type="number" class="form-control" id="fsaldo" name="saldo" placeholder="Estoque" value="<?php echo e($saldo); ?>" required>
                 </div>
 
                 <div class="checkbox">
                     <label for="fativo">
                         <input type="checkbox" name="ativo" id="fativo" 
 
-                               @if($ativo == 1)
+                               <?php if($ativo == 1): ?>
                                checked
-                               @endif
+                               <?php endif; ?>
                                >Produto ativo
 
                     </label>

@@ -111,18 +111,16 @@ class ProdutoController extends Controller {
             $idproduto = (int) $_GET['idproduto'];
         }
 
-        $sql = "Select * From produto
-Where (idproduto = $idproduto)";
+        $sql = "Select * From produto Where (idproduto = $idproduto)";
 
-        $r = mysqli_query($con, $sql);
+        $con = Conexao::getConexao();
+        $r = $con->query($sql);
 
-        if ($r->num_rows == 0) {
+        if (!$produto = $r->fetch()) {
             $url = 'produtos.php';
             $msg = "Registro inexistente.";
             javascriptAlertFim($msg, $url);
         }
-
-        $produto = mysqli_fetch_assoc($r);
 
         $descricao = $produto['produto'];
         $preco = $produto['preco'];
@@ -137,40 +135,36 @@ Where (idproduto = $idproduto)";
             $saldo = (int) $_POST['saldo'];
             $idcategoria = (int) $_POST['idcategoria'];
 
-            if (isset($_POST['ativo'])) {
-                $ativo = PRODUTO_ATIVO;
-            } else {
-                $ativo = PRODUTO_INATIVO;
-            }
+            $produto = new Produto();
+            $produto->setIdproduto($idproduto);
+            $produto->setProduto($descricao);
+            $produto->setPreco($preco);
+            $produto->setIdcategoria($idcategoria);
 
-            // Validar informações
-            if ($descricao == '') {
-                $msg[] = 'Informe a descrição do produto';
-            }
+            $produtoDao = new ProdutoDao();
 
-            // Inserir
-            if (!$msg) {
-                $sql = "Update produto
-        Set produto = '$descricao',
-            preco = '$preco',
-            status = '$ativo',
-            idcategoria = $idcategoria,
-            saldo = $saldo
-        Where (idproduto = $idproduto)";
-
-                $r = mysqli_query($con, $sql);
-
-                if (!$r) {
-                    $msg[] = 'Erro para atualizar o registro';
-                    $msg[] = mysqli_error($con);
-                } else {
-                    $url = 'produtos-editar.php?idproduto=' . $idproduto;
-                    $msg = "Produto $idproduto alterado.";
-
-                    javascriptAlertFim($msg, $url);
-                }
+            try {
+                $produtoDao->update($produto);
+                javascriptAlert('Produto atualizado', 'produtos.php');
+            } catch (Exception $e) {
+                $msg[] = $e->getMessage();
             }
         }
+
+        $sql = 'Select idcategoria,categoria from categoria where (status = 1)';
+        $categorias = $con->query($sql)->fetchAll();
+
+        $view = $this->view();
+        echo $view->render('produtos-editar', array(
+            'idproduto' => $idproduto,
+            'descricao' => $descricao,
+            'preco' => $preco,
+            'idcategoria' => $idcategoria,
+            'categorias' => $categorias,
+            'ativo' => $ativo,
+            'saldo' => $saldo,
+            'msg' => $msg
+        ));
     }
 
     public function apagarAction() {
